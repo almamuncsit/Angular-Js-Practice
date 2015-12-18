@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="store">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Angular Js </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="PhoneListCtrl">
+
+      <div class="container">
+          <div class="row">
+              <div class="col-md-2">
+                  <!--Sidebar content-->
+
+                  Search: <input ng-model="query">
+
+              </div>
+              <div class="col-md-10">
+                  <!--Body content-->
+
+                  <ul class="phones">
+                      <li ng-repeat="phone in phones | filter:query">
+                          <span>{{phone.name}}</span>
+                          <p>{{phone.snippet}}</p>
+                      </li>
+                  </ul>
+
+              </div>
+          </div>
+      </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/searchQuery.js"></script>
+  </body>
+</html>

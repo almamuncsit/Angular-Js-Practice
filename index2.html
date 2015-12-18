@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="store">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Angular Js </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="StoreController as store">
+
+      <div class="container" >
+
+          <div ng-repeat="product in store.products | limitTo:2">
+              <h1>
+                  {{ product.name }}
+                  <em class="pull-right"> {{ product.price | currency }} </em>
+              </h1>
+          </div>
+
+
+          <h2> Order By </h2>
+
+          <div ng-repeat="product in store.products | orderBy: 'price' " class="bg-success">
+              <h1>
+                  {{ product.name }}
+                  <em class="pull-right"> {{ product.price | currency }} </em>
+              </h1>
+          </div>
+
+
+          <h1> Angular filter </h1>
+
+          <!--<h4> *Our Recipe {{ 'hello' | filter:options* }} </h4>-->
+          <h4>{{ "lower cap string" | uppercase }}</h4>
+          <h4>{{ {foo: "bar", baz: 23} | json }} </h4>
+          <h4> {{ 1304375948024 | date }} </h4>
+          <h4> date : {{ 1304375948024 | date:"MM/dd/yyyy @ h:mma" }} </h4>
+          <h4> {{ 'My description' | limitTo:5 }} </h4>
+
+
+      </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/app2.js"></script>
+  </body>
+</html>

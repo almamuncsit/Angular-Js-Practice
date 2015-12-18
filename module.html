@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Angular Js </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+      <style>
+          input.ng-invalid {
+              background-color: lightblue;
+          }
+
+          input.ng-valid {
+              background-color: #cccccc;
+          }
+      </style>
+
+  </head>
+
+  <body ng-controller="myCtrl">
+
+    <h1> Your name is : {{ firstName + ' ' + lastName  }} </h1>
+    <div test-directive></div>
+
+    <input type="text" ng-model="yourName"/> <br/>
+    Your name is : {{ yourName }} <br/>
+    Your name is : {{ fullName() }} <br/>
+
+    <input type="text" ng-model="price"/>
+    <input type="text" ng-model="qty"/> <br/>
+  Total is : {{ ( price * qty ) | currency }}
+
+
+  <p>
+    <form ng-app="" name="myForm" ng-init="myText = 'post@myweb.com'">
+        Email:
+        <input type="email" name="myAddress" ng-model="myText" required></p>
+    <h1>Status</h1>
+    {{myForm.myAddress.$valid}}
+    {{myForm.myAddress.$dirty}}
+    {{myForm.myAddress.$touched}}
+    </form>
+  </p>
+
+  </body>
+</html>
+
+<script src="js/angular.min.js"></script>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope) {
+        $scope.firstName = 'Mamun';
+        $scope.lastName = 'Sarkar';
+        $scope.price = 1;
+        $scope.qty = 2;
+
+        $scope.fullName = function() {
+            return $scope.firstName + ' ' + $scope.lastName;
+        }
+    });
+
+    app.directive('testDirective', function() {
+        return {
+            template: 'hello friend how are you. This si test directive'
+        }
+    });
+
+</script>

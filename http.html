@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Angular Js </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+
+  <body ng-controller="myCtrl">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <button ng-click="toggle()"> Toggle </button>
+                <ul ng-hide="myVar">
+                    <li ng-repeat="x in names | orderBy : 'Name'">
+                        {{ x.Name + ', ' + x.Country }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-6">
+                <input type="text" ng-model="name"/>
+                <table class="table table-striped">
+                    <tr ng-repeat="x in names | filter:name | orderBy : 'Country' ">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{ x.Name }}</td>
+                        <td>{{ x.Country  | uppercase }}</td>
+                    </tr>
+                </table>
+
+                <tr>
+                    <form action="" name="myForm">
+                        <td></td>
+                        <td><input type="text" name="Name"/> </td>
+                        <td><input type="text" name="Country"/></td>
+                        <td><input type="submit" value="Add"/></td>
+                    </form>
+
+
+                </tr>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+  </body>
+</html>
+
+<script src="js/angular.min.js"></script>
+
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $scope.names = [];
+
+        $http.get('http://www.w3schools.com/angular/customers.php').then(function(response){
+            $scope.names = response.data.records;
+        });
+
+        $scope.myVar = false;
+        $scope.toggle = function() {
+            $scope.myVar = !$scope.myVar;
+        }
+
+
+        // On local fiel
+//        $http.get('data.json').then(function(response){
+//            $scope.names = response.data.records;
+//        });
+
+    });
+
+
+</script>

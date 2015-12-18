@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="store">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Angular Js </title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="StoreController as store">
+
+      <div class="container" >
+          <h2> Order By </h2>
+
+          <div ng-repeat="product in store.products | orderBy: 'price' " class="bg-success">
+              <h1>
+                  {{ product.name }}
+                  <em class="pull-right"> {{ product.price | currency }} </em>
+              </h1>
+
+              <blockquote ng-repeat="review in product.review" class="bg-warning">
+                  <h4>
+                      {{ review.comment }}
+                      <em class="pull-right"> {{ review.rate }} </em>
+                  </h4>
+                  <p> {{ review.description }} </p>
+
+              </blockquote>
+
+
+
+
+
+
+              <blockquote class="col-md-3">
+                  <form name="reviewForm" ng-controller="ReviewController as ReviewCtrl"
+                          ng-submit="ReviewCtrl.addReview(product)">
+
+                      <blockquote class="bg-info">
+                          <h4>
+                              {{ ReviewCtrl.review.comment }}
+                              <em class="pull-right"> {{ ReviewCtrl.review.rate }} </em>
+                          </h4>
+                          <p> {{ ReviewCtrl.review.description }} </p>
+
+                      </blockquote>
+
+                    <select ng-model="ReviewCtrl.review.rate">
+                        <option selected value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                      <input type="text" name="comment" ng-model="ReviewCtrl.review.comment"/>
+                      <input type="text" name="description" ng-model="ReviewCtrl.review.description"/>
+                      <input type="submit" value="submit" />
+                  </form>
+              </blockquote>
+
+          </div>
+
+
+
+      </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/app3.js"></script>
+  </body>
+</html>
